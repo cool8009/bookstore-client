@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Form } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import UserService from '../services/UserService'
 
 const Login = () => {
@@ -35,28 +37,31 @@ const onSubmit = (e) => {
 }
 
   return (
-    <form className='add-form' onSubmit={onSubmit}>
-      <div className='form-control'>
-        <label>email</label>
-        <input
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className='form-control'>
-        <label>password</label>
-        <input
-          type='text'
-          placeholder='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-
-      <input type='submit' value='Login' className='btn btn-block' />
-    </form>
+    <div>
+      <form className='add-form' onSubmit={onSubmit}>
+        <div className='form-control'>
+          <label>email</label>
+          <input
+            type='text'
+            placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className='form-control'>
+          <label>password</label>
+          <input
+            type='password'
+            placeholder='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+  
+        <input type='submit' value='Login' className='btn btn-block' />
+      </form>
+      <button onClick={() => navigate('/register')}>Register!</button>
+    </div>
   )
 }
 
