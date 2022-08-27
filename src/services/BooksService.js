@@ -31,7 +31,12 @@ const BookService = {
         let result = await axios.put(`${serverPostRoute}/purchase/${id}`, null, 
         { headers: { 'Authorization': `Bearer ${token}` } });
         return result;
+    },
+
+    async getBooksForAuthorId(authorid) {
+        return await (axios.get(`${serverPostRoute}/findauthor/${authorid}`)).data
     }
+    
 
 }
 

@@ -33,11 +33,16 @@ const Store = () => {
   }
 
   return (
-    <div>
-       <CardGroup>
+    <div className="store-container" style={{ textAlign: 'center' }}>
+      <h1 marginTop="30px">Welcome to our store</h1>
+      <div>
+       <CardGroup style={{ alignItems: 'center',
+        justifyContent: 'center'}}>
         { books.map((book, index) =>
         <BookCard key={index} book={book} onPurchaseClick={onPurchaseClick}/>)}
        </CardGroup>
+
+      </div>
 
     </div>
   )
