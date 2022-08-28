@@ -34,7 +34,10 @@ const BookService = {
     },
 
     async getBooksForAuthorId(authorid) {
-        return await (axios.get(`${serverPostRoute}/findauthor/${authorid}`)).data
+        let myBooks = [];
+        const tempResult = (await axios.get(`${serverPostRoute}/findauthor/${authorid}`)).data
+        tempResult.map((book) => myBooks.push(book))
+        return myBooks;
     }
     
 

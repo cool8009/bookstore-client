@@ -19,7 +19,7 @@ const BookCard = ({ key, book, onPurchaseClick}) => {
 
   return (
     <div className="book-container">
-      <Card className="flex-fill" style={{width: '15rem', height: '38rem', 
+      <Card className="flex-fill" style={{width: '15rem', height: '40rem', 
       alignments: 'center', marginLeft: '50px', marginTop: '50px'}}>
         <Card.Img variant="top" src={book.imageUrl} style={{width: '100%' , height: '15vw', objectFit: 'cover'}}/>
         <Card.Body styles={{display:'flex'}}>
@@ -33,7 +33,7 @@ const BookCard = ({ key, book, onPurchaseClick}) => {
         </ListGroup>
       </Card.Body>
       <Card.Footer>Price: {book.price} Left In Stock: {book.amountInStock} 
-        <Button  variant="primary" onClick={ () => onPurchaseClick(book)}>Purchase</Button>
+        { onPurchaseClick !== null && <Button  variant="primary" onClick={ () => onPurchaseClick(book)}>Purchase</Button>}
       </Card.Footer>
       </Card>
     </div>
