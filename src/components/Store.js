@@ -4,15 +4,7 @@ import BookCard from './BookCard'
 import CardGroup from 'react-bootstrap/CardGroup';
 import BookService from '../services/BooksService'
 
-const Store = () => {
-  const [ books, setBooks ] = useState([]);
-  useEffect(() => {
-    const getBooks = async () => {
-        await BookService.getAllBook().then((books) => setBooks(books));     
-      // setBooks(booksFromServer);
-    }
-    getBooks();
-  }, [])
+const Store = ({ books, handleUpdateBooks, authors}) => {
 
   const onPurchaseClick = async (book) => {
     if (localStorage.getItem('token') == null){
@@ -21,15 +13,13 @@ const Store = () => {
     }
     await BookService.buyBook(book.id)
       .then(alert(`Thank you for your purchase of ${book.name}` ))
-      .then((book) => handleUpdate(book.id + 1, book))
+      .then((book) => handleUpdateBooks(book.id + 1, book))
       .catch((error) => alert(error));
-
   }
 
-  const handleUpdate = (index, book) => {
-    const newBooks = [...books];
-    newBooks[index] = book;
-    setBooks(newBooks);
+  const getAuthorForBookCard = (book) => {
+    let foundAuthor = authors.find(author => author.id === book.authorId);
+    return foundAuthor.name;
   }
 
   return (
@@ -39,7 +29,7 @@ const Store = () => {
        <CardGroup style={{ alignItems: 'center',
         justifyContent: 'center'}}>
         { books.map((book, index) =>
-        <BookCard key={index} book={book} onPurchaseClick={onPurchaseClick}/>)}
+        <BookCard key={index} book={book} onPurchaseClick={onPurchaseClick} getAuthorForBookCard={getAuthorForBookCard}/>)}
        </CardGroup>
 
       </div>

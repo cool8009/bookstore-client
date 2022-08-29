@@ -24,6 +24,13 @@ const AuthorService = {
         tempResult.map((author) => myAuthors.push(author))
         return myAuthors;
     },
+    async searchAuthors(text) {
+        let token = getToken();
+        let myAuthors = [];
+        const tempResult = (await axios.get(`${serverPostRoute}/search/${text}`)).data;
+        tempResult.map((author) => myAuthors.push(author))
+        return myAuthors;
+    },
 }
 
 

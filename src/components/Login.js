@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserService from '../services/UserService'
 
-const Login = () => {
+const Login = ({setIsUserValidated}) => {
 const navigate = useNavigate();
 const [email, setEmail] = useState('')
 const [password, setPassword] =  useState('');
@@ -19,6 +19,7 @@ const sendCreds = async (creds) => {
     console.log(res);
     if (res.data.token) {
       localStorage.setItem("token", res.data.token);
+      setIsUserValidated(true);
     }
     navigate('/store');
   })
@@ -42,23 +43,25 @@ const onSubmit = (e) => {
 }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Form.Group  className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" id='email'/>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
+    <Container fluid="sm">
+      <Form onSubmit={onSubmit} >
+        <Form.Group  className="mb-3 w-50" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" id='email'/>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" id='password'/>
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" id='password'/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </Container>
 
 
     // <div className="form-group">

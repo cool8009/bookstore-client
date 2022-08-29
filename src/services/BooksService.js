@@ -38,7 +38,15 @@ const BookService = {
         const tempResult = (await axios.get(`${serverPostRoute}/findauthor/${authorid}`)).data
         tempResult.map((book) => myBooks.push(book))
         return myBooks;
-    }
+    },
+
+    async searchBooks(text) {
+        let token = getToken();
+        let myBooks = [];
+        const tempResult = (await axios.get(`${serverPostRoute}/search/${text}`)).data;
+        tempResult.map((book) => myBooks.push(book))
+        return myBooks;
+    },
     
 
 }

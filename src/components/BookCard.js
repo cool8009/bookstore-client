@@ -5,15 +5,10 @@ import AuthorService from '../services/AuthorService';
 import { Button, Card, ListGroup} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const BookCard = ({ key, book, onPurchaseClick}) => {
-  const [author, setAuthor] = useState({});
+const BookCard = ({ key, book, onPurchaseClick, getAuthorForBookCard}) => {
+  const [author, setAuthor] = useState('');
   useEffect(() => {
-    const getAuthorNameFromApi = async (id) => {
-      await AuthorService.getAuthor(id)
-        .then((author) => setAuthor(author));
-      
-    }
-    getAuthorNameFromApi(book.authorId)
+    setAuthor(getAuthorForBookCard(book))
   }, [] )
   
 
@@ -29,7 +24,7 @@ const BookCard = ({ key, book, onPurchaseClick}) => {
           {book.description}
         </Card.Text>
         <ListGroup>
-          <ListGroup.Item styles={{ marginTop: '20px' }}>By: {author.name} </ListGroup.Item>
+          <ListGroup.Item styles={{ marginTop: '20px' }}>By: {author} </ListGroup.Item>
         </ListGroup>
       </Card.Body>
       <Card.Footer>Price: {book.price} Left In Stock: {book.amountInStock} 
