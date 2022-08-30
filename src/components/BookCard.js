@@ -8,7 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const BookCard = ({ key, book, onPurchaseClick, getAuthorForBookCard}) => {
   const [author, setAuthor] = useState('');
   useEffect(() => {
-    setAuthor(getAuthorForBookCard(book))
+      if (typeof(getAuthorForBookCard) === 'function'){
+        setAuthor(getAuthorForBookCard(book))
+      }
+      else {
+        setAuthor(getAuthorForBookCard)
+      }
   }, [] )
   
 
@@ -28,7 +33,7 @@ const BookCard = ({ key, book, onPurchaseClick, getAuthorForBookCard}) => {
         </ListGroup>
       </Card.Body>
       <Card.Footer>Price: {book.price} Left In Stock: {book.amountInStock} 
-        { onPurchaseClick !== null && <Button  variant="primary" onClick={ () => onPurchaseClick(book)}>Purchase</Button>}
+        { typeof(onPurchaseClick) === 'function' && <Button  variant="primary" onClick={ () => onPurchaseClick(book)}>Purchase</Button>}
       </Card.Footer>
       </Card>
     </div>

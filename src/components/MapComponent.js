@@ -10,7 +10,7 @@ const MapComponent = (props) => {
     })
   return (
     <div>
-        <iframe id="iframeId" style={{ width: '500px', height: '500px',margin: '0 auto', display: 'block', borderStyle: 'none' }}></iframe>
+        <iframe id="iframeId" style={{ width: props.width, height: props.height ,margin: '0 auto', display: 'block', borderStyle: 'none' }}></iframe>
     </div>
   )
 }

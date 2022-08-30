@@ -35,13 +35,12 @@ const AuthorPage = () => {
             </Badge>
         </h1>
         <h2 style={{ textAlign: 'center' }}> Author's Home Town:</h2>
-        <MapComponent lat={location.state.author.homeLatitude} lon={location.state.author.homeLongitude}>
-        </MapComponent>
+        <MapComponent width={'500px'} height={'500px'} lat={location.state.author.homeLatitude} lon={location.state.author.homeLongitude} />
         <h2 style={{ textAlign: 'center', marginTop: '50px' }}> Author's Books:</h2>
         <CardGroup style={{ alignItems: 'center',
         justifyContent: 'center'}}>
             { authorBooks.map((book, index) =>
-            <BookCard key={index} book={book} onPurchaseClick={null}/>)}
+            <BookCard key={index} book={book} onPurchaseClick={null} getAuthorForBookCard={location.state.author.name}/>)}
         </CardGroup>
     </div>
   )

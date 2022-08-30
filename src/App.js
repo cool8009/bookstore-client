@@ -13,14 +13,12 @@ import AuthorPage from './components/AuthorPage';
 import { Button } from 'react-bootstrap';
 import AuthorService from './services/AuthorService';
 import BookService from './services/BooksService';
+import CustomNavbar from './components/CustomNavbar';
 
 
 
 function App() {
-  // const navigate = useNavigate();
-  // const navigateToSearchResultPage = () => {
-  //   navigate('/search',{state:{authorSearchResults, bookSearchResults}});
-  // }
+  
   useEffect(() => {
     setIsUserValidated(localStorage.getItem('token') !== null); 
     const getBooks = async () => {
@@ -80,28 +78,9 @@ function App() {
   return (
 
     <Router>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand as={Link} to={'/store'}> Book Store</Navbar.Brand>
-          <Nav>
-            <Nav.Link as={Link} to={'/store'}>Store</Nav.Link>
-            <Nav.Link as={Link} to={'/authors'}>Authors</Nav.Link>
-            { isUserValidated ? <Button onClick={ () => onLogOutClick()}>Log Out</Button> 
-            : <Nav.Link as={Link} to={'/'}>Log In</Nav.Link>} 
-          </Nav>
-          <Form onSearchSubmit={onSearchSubmit} className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="
-              Books Or Authors"
-              className="me-2"
-              aria-label="Search"
-              id='searchtext'
-            />
-            <Button variant="outline-success" type="submit">Search</Button>
-          </Form>
-        </Container>
-      </Navbar>
+      <CustomNavbar authors={authors} books={books}
+          setAuthorSearchResults={setAuthorSearchResults} setBookSearchResults ={setBookSearchResults}
+            isUserValidated={isUserValidated} onLogOutClick={onLogOutClick} authorSearchResults={authorSearchResults} bookSearchResults={bookSearchResults}/>
       <Routes>
         {/* <Route path='/' element={isUserValidated ?  <Store/> : <Login/>}/> */}
         <Route path='/' element={<Login setIsUserValidated={setIsUserValidated}/>}/>
