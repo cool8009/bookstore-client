@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://localhost:7017/api";
+const baseUrl = "http://49.12.240.169:7017/api";
 
 const serverPostRoute = `${baseUrl}/Books`;
 

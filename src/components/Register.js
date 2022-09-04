@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Container } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import UserService from '../services/UserService'
 
 const Register = () => {
@@ -24,7 +26,7 @@ const Register = () => {
   
   const onSubmit = (e) => {
     e.preventDefault()
-  
+    let { email, password, firstName, lastName } = e.target.elements;
     if (!email) {
       alert('Please insert email ')
       return
@@ -41,14 +43,49 @@ const Register = () => {
       alert('Please insert lastName ')
       return
     }
+
+
   
     sendCreds({ email, password, firstName, lastName })
   
   }
 
   return (
-    <div>
-      <form className='add-form' onSubmit={onSubmit}>
+
+      <Container fluid="sm">
+      <Form onSubmit={onSubmit} >
+
+        <Form.Group  className="mb-3 w-50" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" id='email'/>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" id='password'/>
+        </Form.Group>
+        <Form.Group className="mb-3 w-50" controlId="formBasicFirstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control type="text" placeholder="First Name" id='firstName'/>
+        </Form.Group>
+        <Form.Group className="mb-3 w-50" controlId="formBasicLastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control type="text" placeholder="Last Name" id='lastName'/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      <Button onClick={() => navigate('/')}>Back To Login</Button>
+    </Container>
+
+
+
+
+      /* <form className='add-form' onSubmit={onSubmit}>
         <div className='form-control'>
           <label>email</label>
           <input
@@ -89,7 +126,7 @@ const Register = () => {
         <input type='submit' value='Register' className='btn btn-block' />
       </form>
       <button onClick={() => navigate('/')}>Login To Your Account</button>
-    </div>
+    </div> */
   )
 }
 

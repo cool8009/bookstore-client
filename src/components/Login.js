@@ -61,6 +61,7 @@ const onSubmit = (e) => {
           Submit
         </Button>
       </Form>
+      <Button onClick={() => navigate('/register')}>Register!</Button>
     </Container>
 
 
@@ -87,7 +88,6 @@ const onSubmit = (e) => {
   
     //     <input type='submit' value='Login' className='btn btn-block' />
     //   </form>
-    //   <button onClick={() => navigate('/register')}>Register!</button>
     // </div>
   )
 }
